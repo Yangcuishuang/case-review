@@ -1,0 +1,64 @@
+{
+    "description": "测试用例 - 验证检测引擎功能",
+    "cases": [
+        {
+            "case_id": "TEST_001",
+            "description": "轻度违规 - 口头禅",
+            "reported_id": "P002",
+            "reporter_id": "P001",
+            "chat_messages": [
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "你能不能快点"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "卧槽，被gank了"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "我靠，又死了"},
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "你小心点啊"}
+            ]
+        },
+        {
+            "case_id": "TEST_002",
+            "description": "中度违规 - 针对性辱骂",
+            "reported_id": "P002",
+            "reporter_id": "P001",
+            "chat_messages": [
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "你怎么不参团"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "你自己先送的在说我"},
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "我送？你看你0-5的数据"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "闭嘴吧傻逼，自己菜还bb"},
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "我举报你了"}
+            ]
+        },
+        {
+            "case_id": "TEST_003",
+            "description": "正常对话 - 无违规",
+            "reported_id": "P002",
+            "reporter_id": "P001",
+            "chat_messages": [
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "打得不错"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "谢谢，下次一起"},
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "好嘞"}
+            ]
+        },
+        {
+            "case_id": "TEST_004",
+            "description": "严重违规 - 恶毒辱骂",
+            "reported_id": "P002",
+            "reporter_id": "P001",
+            "chat_messages": [
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "你别送了"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "你妈死了管得着吗"},
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "你说什么？"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "nmsl，全家死光"}
+            ]
+        },
+        {
+            "case_id": "TEST_005",
+            "description": "规避手段测试",
+            "reported_id": "P002",
+            "reporter_id": "P001",
+            "chat_messages": [
+                {"sender_id": "P001", "sender_name": "玩家A", "content": "你打得也太差了"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "s.b. 你才差"},
+                {"sender_id": "P002", "sender_name": "玩家B", "content": "傻*逼一个"}
+            ]
+        }
+    ]
+}

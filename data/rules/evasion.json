@@ -1,0 +1,26 @@
+{
+    "description": "规避手段规则库",
+    "evasion_rules": [
+        {
+            "id": "evasion_symbol_01",
+            "pattern": "s\\.?b\\.?",
+            "level": "moderate_direct",
+            "description": "字母缩写: s.b.",
+            "flags": "IGNORECASE"
+        },
+        {
+            "id": "evasion_space_01",
+            "pattern": "傻\\s*逼",
+            "level": "moderate_direct",
+            "description": "空格插入: 傻逼变体",
+            "flags": ""
+        },
+        {
+            "id": "evasion_star_01",
+            "pattern": "傻[*xX#]+逼",
+            "level": "moderate_direct",
+            "description": "星号替换: 傻*逼",
+            "flags": ""
+        }
+    ]
+}

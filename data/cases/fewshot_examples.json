@@ -1,0 +1,33 @@
+{
+    "description": "人工已标注的few-shot示例 - 用于LLM判罚对齐",
+    "examples": [
+        {
+            "chat": "A: 你怎么不走中路\nB: 中路是你走的吗？菜鸡\nA: 你别BB了\nB: 我BB怎么了？自己菜还怪队友",
+            "reported": "B",
+            "is_violation": true,
+            "level": "mild_insult",
+            "reason": "使用轻度侮辱性词汇'菜鸡'，但属于游戏内常见互喷，未造成严重伤害"
+        },
+        {
+            "chat": "A: 你会不会玩啊\nB: 关你屁事\nA: 我举报你了\nB: 随便你，傻逼一个",
+            "reported": "B",
+            "is_violation": true,
+            "level": "moderate_direct",
+            "reason": "直接使用侮辱性词汇'傻逼'攻击对方，属于针对性辱骂"
+        },
+        {
+            "chat": "A: 666\nB: 谢谢\nA: 手法不错\nB: 下次一起",
+            "reported": "B",
+            "is_violation": false,
+            "level": "none",
+            "reason": "正常友好交流，无违规行为"
+        },
+        {
+            "chat": "A: 你好厉害啊\nB: 哈哈谢谢\nA: 下把一起？\nB: 好啊",
+            "reported": "A",
+            "is_violation": false,
+            "level": "none",
+            "reason": "正常游戏交流，属于友好互动"
+        }
+    ]
+}

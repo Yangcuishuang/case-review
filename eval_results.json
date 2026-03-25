@@ -1,0 +1,567 @@
+{
+  "total": 70,
+  "correct": 31,
+  "accuracy": 0.44285714285714284,
+  "details": [
+    {
+      "case_id": "EXAMPLE_001",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_002",
+      "expected": "轻度-口头禅违规",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共1句违规/被举报人30句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_003",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_004",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_005",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_006",
+      "expected": "轻度-口头禅违规",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共2句违规/被举报人14句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_007",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_008",
+      "expected": "轻度-口头禅违规",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共1句违规/被举报人81句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_009",
+      "expected": "轻度-口头禅违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": false,
+      "reason": "检测到1句「性侮辱女性」类违规（共3句违规/被举报人15句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_010",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_011",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_012",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_013",
+      "expected": "轻度-口头禅违规",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共1句违规/被举报人2句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_014",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_015",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_016",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_017",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_018",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_019",
+      "expected": "轻度-口头禅违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": false,
+      "reason": "检测到1句「性侮辱女性」类违规（共1句违规/被举报人9句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_020",
+      "expected": "轻度-口头禅违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_021",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_022",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_023",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_024",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-口头禅",
+      "correct": true,
+      "reason": "检测到3句「口头禅」类违规（共3句违规/被举报人34句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_025",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_026",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到2句「普通辱骂」类违规（共2句违规/被举报人36句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_027",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_028",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_029",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到3句「普通辱骂」类违规（共4句违规/被举报人38句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_030",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到3句「普通辱骂」类违规（共4句违规/被举报人17句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_031",
+      "expected": "中度言语违规",
+      "actual": "严重言语违规-涉政",
+      "correct": false,
+      "reason": "检测到2句「涉政」类违规（共2句违规/被举报人6句发言），判定为严重言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_032",
+      "expected": "中度言语违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": true,
+      "reason": "检测到1句「性侮辱女性」类违规（共2句违规/被举报人20句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_033",
+      "expected": "中度言语违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": true,
+      "reason": "检测到1句「性侮辱女性」类违规（共1句违规/被举报人36句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_034",
+      "expected": "中度言语违规",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": false,
+      "reason": "检测到2句「普通辱骂」类违规（共4句违规/被举报人53句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_035",
+      "expected": "中度言语违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": true,
+      "reason": "检测到1句「性侮辱女性」类违规（共2句违规/被举报人9句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_036",
+      "expected": "中度言语违规",
+      "actual": "严重言语违规-涉政",
+      "correct": false,
+      "reason": "检测到1句「涉政」类违规（共2句违规/被举报人7句发言），判定为严重言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_037",
+      "expected": "中度言语违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_038",
+      "expected": "中度言语违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": true,
+      "reason": "检测到1句「性侮辱女性」类违规（共2句违规/被举报人15句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_039",
+      "expected": "中度言语违规",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": false,
+      "reason": "检测到9句「普通辱骂」类违规（共17句违规/被举报人61句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_040",
+      "expected": "中度言语违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": true,
+      "reason": "检测到1句「性侮辱女性」类违规（共3句违规/被举报人15句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_041",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共1句违规/被举报人10句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_042",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共2句违规/被举报人19句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_043",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到2句「普通辱骂」类违规（共2句违规/被举报人36句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_044",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共2句违规/被举报人9句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_045",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_046",
+      "expected": "轻度-轻度辱骂",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": false,
+      "reason": "检测到1句「性侮辱女性」类违规（共1句违规/被举报人41句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_047",
+      "expected": "轻度-轻度辱骂",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": false,
+      "reason": "检测到1句「性侮辱女性」类违规（共4句违规/被举报人18句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_048",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_049",
+      "expected": "轻度-轻度辱骂",
+      "actual": "轻度言语违规-普通辱骂",
+      "correct": true,
+      "reason": "检测到1句「普通辱骂」类违规（共1句违规/被举报人13句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_050",
+      "expected": "轻度-轻度辱骂",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_051",
+      "expected": "严重言语违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_052",
+      "expected": "严重言语违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": false,
+      "reason": "检测到2句「性侮辱女性」类违规（共2句违规/被举报人58句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_053",
+      "expected": "严重言语违规",
+      "actual": "轻度言语违规-口头禅",
+      "correct": false,
+      "reason": "检测到5句「口头禅」类违规（共5句违规/被举报人28句发言），判定为轻度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_054",
+      "expected": "严重言语违规",
+      "actual": "严重言语违规-涉政",
+      "correct": true,
+      "reason": "检测到2句「涉政」类违规（共4句违规/被举报人31句发言），判定为严重言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_055",
+      "expected": "严重言语违规",
+      "actual": "严重言语违规-涉政",
+      "correct": true,
+      "reason": "检测到1句「涉政」类违规（共4句违规/被举报人10句发言），判定为严重言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_056",
+      "expected": "严重言语违规",
+      "actual": "中度言语违规-性侮辱女性",
+      "correct": false,
+      "reason": "检测到1句「性侮辱女性」类违规（共4句违规/被举报人13句发言），判定为中度言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_057",
+      "expected": "严重言语违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_058",
+      "expected": "严重言语违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_059",
+      "expected": "严重言语违规",
+      "actual": "无违规-无违规",
+      "correct": false,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_060",
+      "expected": "严重言语违规",
+      "actual": "严重言语违规-涉政",
+      "correct": true,
+      "reason": "检测到1句「涉政」类违规（共6句违规/被举报人38句发言），判定为严重言语违规",
+      "needs_review": false
+    },
+    {
+      "case_id": "EXAMPLE_061",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_062",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_063",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_064",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_065",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_066",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_067",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_068",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_069",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    },
+    {
+      "case_id": "EXAMPLE_070",
+      "expected": "无违规",
+      "actual": "无违规-无违规",
+      "correct": true,
+      "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+      "needs_review": true
+    }
+  ]
+}

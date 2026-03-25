@@ -1,0 +1,357 @@
+[
+  {
+    "case_id": "TEST_001",
+    "reported_player_id": "P002",
+    "reporter_player_id": "P001",
+    "is_violation": true,
+    "violation_level": "mild_insult",
+    "violation_category": "mild",
+    "confidence": 0.95,
+    "hit_rules": [
+      {
+        "source": "keyword",
+        "matched_text": "卧槽",
+        "rule_id": "keyword_卧槽",
+        "rule_description": "卧槽"
+      },
+      {
+        "source": "keyword",
+        "matched_text": "我靠",
+        "rule_id": "keyword_我靠",
+        "rule_description": "我靠"
+      },
+      {
+        "source": "keyword",
+        "matched_text": "靠",
+        "rule_id": "keyword_靠",
+        "rule_description": "靠"
+      }
+    ],
+    "reason": "关键词命中违规词汇 [卧槽]，判定为 轻度-轻度辱骂",
+    "detection_chain": [
+      {
+        "source": "keyword",
+        "is_violation": true,
+        "violation_level": "mild_insult",
+        "confidence": 0.95,
+        "hit_rules": [
+          {
+            "source": "keyword",
+            "matched_text": "卧槽",
+            "rule_id": "keyword_卧槽",
+            "rule_description": "卧槽"
+          },
+          {
+            "source": "keyword",
+            "matched_text": "我靠",
+            "rule_id": "keyword_我靠",
+            "rule_description": "我靠"
+          },
+          {
+            "source": "keyword",
+            "matched_text": "靠",
+            "rule_id": "keyword_靠",
+            "rule_description": "靠"
+          }
+        ],
+        "reason": "关键词命中违规词汇 [卧槽]，判定为 轻度-轻度辱骂"
+      }
+    ],
+    "needs_manual_review": false,
+    "manual_review_reason": "",
+    "chat_context": [
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "你能不能快点",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "卧槽，被gank了",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "我靠，又死了",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "你小心点啊",
+        "timestamp": null
+      }
+    ]
+  },
+  {
+    "case_id": "TEST_002",
+    "reported_player_id": "P002",
+    "reporter_player_id": "P001",
+    "is_violation": true,
+    "violation_level": "moderate_discrimination",
+    "violation_category": "moderate",
+    "confidence": 0.95,
+    "hit_rules": [
+      {
+        "source": "keyword",
+        "matched_text": "傻逼",
+        "rule_id": "keyword_傻逼",
+        "rule_description": "傻逼"
+      }
+    ],
+    "reason": "关键词命中违规词汇 [傻逼]，判定为 中度-歧视性言论",
+    "detection_chain": [
+      {
+        "source": "keyword",
+        "is_violation": true,
+        "violation_level": "moderate_discrimination",
+        "confidence": 0.95,
+        "hit_rules": [
+          {
+            "source": "keyword",
+            "matched_text": "傻逼",
+            "rule_id": "keyword_傻逼",
+            "rule_description": "傻逼"
+          }
+        ],
+        "reason": "关键词命中违规词汇 [傻逼]，判定为 中度-歧视性言论"
+      }
+    ],
+    "needs_manual_review": false,
+    "manual_review_reason": "",
+    "chat_context": [
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "你怎么不参团",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "你自己先送的在说我",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "我送？你看你0-5的数据",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "闭嘴吧傻逼，自己菜还bb",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "我举报你了",
+        "timestamp": null
+      }
+    ]
+  },
+  {
+    "case_id": "TEST_003",
+    "reported_player_id": "P002",
+    "reporter_player_id": "P001",
+    "is_violation": false,
+    "violation_level": "none",
+    "violation_category": "none",
+    "confidence": 0.1,
+    "hit_rules": [],
+    "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol.",
+    "detection_chain": [
+      {
+        "source": "llm",
+        "is_violation": false,
+        "violation_level": "none",
+        "confidence": 0.1,
+        "hit_rules": [],
+        "reason": "LLM调用失败: Request URL is missing an 'http://' or 'https://' protocol."
+      }
+    ],
+    "needs_manual_review": true,
+    "manual_review_reason": "LLM无法确定是否违规，建议人工复核",
+    "chat_context": [
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "打得不错",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "谢谢，下次一起",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "好嘞",
+        "timestamp": null
+      }
+    ]
+  },
+  {
+    "case_id": "TEST_004",
+    "reported_player_id": "P002",
+    "reporter_player_id": "P001",
+    "is_violation": true,
+    "violation_level": "severe_extreme",
+    "violation_category": "severe",
+    "confidence": 0.95,
+    "hit_rules": [
+      {
+        "source": "keyword",
+        "matched_text": "你妈死了",
+        "rule_id": "keyword_你妈死了",
+        "rule_description": "你妈死了"
+      },
+      {
+        "source": "keyword",
+        "matched_text": "nmsl",
+        "rule_id": "keyword_nmsl",
+        "rule_description": "nmsl"
+      },
+      {
+        "source": "keyword",
+        "matched_text": "全家死光",
+        "rule_id": "keyword_全家死光",
+        "rule_description": "全家死光"
+      }
+    ],
+    "reason": "关键词命中违规词汇 [你妈死了]，判定为 严重-极端内容",
+    "detection_chain": [
+      {
+        "source": "keyword",
+        "is_violation": true,
+        "violation_level": "severe_extreme",
+        "confidence": 0.95,
+        "hit_rules": [
+          {
+            "source": "keyword",
+            "matched_text": "你妈死了",
+            "rule_id": "keyword_你妈死了",
+            "rule_description": "你妈死了"
+          },
+          {
+            "source": "keyword",
+            "matched_text": "nmsl",
+            "rule_id": "keyword_nmsl",
+            "rule_description": "nmsl"
+          },
+          {
+            "source": "keyword",
+            "matched_text": "全家死光",
+            "rule_id": "keyword_全家死光",
+            "rule_description": "全家死光"
+          }
+        ],
+        "reason": "关键词命中违规词汇 [你妈死了]，判定为 严重-极端内容"
+      }
+    ],
+    "needs_manual_review": false,
+    "manual_review_reason": "",
+    "chat_context": [
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "你别送了",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "你妈死了管得着吗",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "你说什么？",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "nmsl，全家死光",
+        "timestamp": null
+      }
+    ]
+  },
+  {
+    "case_id": "TEST_005",
+    "reported_player_id": "P002",
+    "reporter_player_id": "P001",
+    "is_violation": true,
+    "violation_level": "moderate_discrimination",
+    "violation_category": "moderate",
+    "confidence": 0.95,
+    "hit_rules": [
+      {
+        "source": "keyword",
+        "matched_text": "sb",
+        "rule_id": "keyword_sb",
+        "rule_description": "sb"
+      },
+      {
+        "source": "keyword",
+        "matched_text": "傻逼",
+        "rule_id": "keyword_傻逼",
+        "rule_description": "傻逼"
+      }
+    ],
+    "reason": "关键词命中违规词汇 [sb]，判定为 中度-歧视性言论",
+    "detection_chain": [
+      {
+        "source": "keyword",
+        "is_violation": true,
+        "violation_level": "moderate_discrimination",
+        "confidence": 0.95,
+        "hit_rules": [
+          {
+            "source": "keyword",
+            "matched_text": "sb",
+            "rule_id": "keyword_sb",
+            "rule_description": "sb"
+          },
+          {
+            "source": "keyword",
+            "matched_text": "傻逼",
+            "rule_id": "keyword_傻逼",
+            "rule_description": "傻逼"
+          }
+        ],
+        "reason": "关键词命中违规词汇 [sb]，判定为 中度-歧视性言论"
+      }
+    ],
+    "needs_manual_review": false,
+    "manual_review_reason": "",
+    "chat_context": [
+      {
+        "sender_id": "P001",
+        "sender_name": "玩家A",
+        "content": "你打得也太差了",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "s.b. 你才差",
+        "timestamp": null
+      },
+      {
+        "sender_id": "P002",
+        "sender_name": "玩家B",
+        "content": "傻*逼一个",
+        "timestamp": null
+      }
+    ]
+  }
+]

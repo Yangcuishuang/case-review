@@ -1,0 +1,26 @@
+{
+    "description": "正则模式规则库",
+    "patterns": [
+        {
+            "id": "pinyin_swear_01",
+            "pattern": "n+\\s*m+\\s*s+\\s*l+",
+            "level": "severe_extreme",
+            "description": "拼音缩写: 你妈死了",
+            "flags": "IGNORECASE"
+        },
+        {
+            "id": "pinyin_swear_02",
+            "pattern": "c+a+o+",
+            "level": "mild_swearword",
+            "description": "拼音: 靠",
+            "flags": "IGNORECASE"
+        },
+        {
+            "id": "repeated_insult",
+            "pattern": "(傻|蠢|废|垃圾|菜|坑).{0,5}(傻|蠢|废|垃圾|菜|坑)",
+            "level": "moderate_direct",
+            "description": "重复侮辱性词汇组合",
+            "flags": ""
+        }
+    ]
+}
