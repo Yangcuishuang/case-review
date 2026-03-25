@@ -245,6 +245,48 @@
       <button class="btn btn-success" onclick="exportReviewForAI()">📋 导出复审数据给AI优化</button>
       <button class="btn btn-secondary" onclick="copyReviewSummary()">📄 复制复审摘要</button>
     </div>
+    <div class="export-row" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--gray-200);">
+      <span style="color:var(--gray-600); font-size:13px;">实时反馈：</span>
+      <label style="display:flex; align-items:center; gap:4px;">
+        <input type="checkbox" id="autoSyncEnabled" onchange="toggleAutoSync()">
+        <span style="font-size:13px;">启用自动同步到GitHub</span>
+      </label>
+      <button class="btn btn-secondary" onclick="showTokenConfig()">⚙️ 配置Token</button>
+    </div>
+  </div>
+
+  <!-- Token Config Modal -->
+  <div class="modal-overlay" id="tokenModal">
+    <div class="modal" style="max-width:500px;">
+      <div class="modal-header">
+        <h2>配置GitHub Token（实时同步）</h2>
+        <button class="modal-close" onclick="closeTokenModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-size:13px; color:var(--gray-700); margin-bottom:6px;">GitHub用户名</label>
+          <input type="text" id="configUsername" class="search-input" style="width:100%;" placeholder="你的GitHub用户名">
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-size:13px; color:var(--gray-700); margin-bottom:6px;">GitHub Token</label>
+          <input type="password" id="configToken" class="search-input" style="width:100%;" placeholder="ghp_xxxxxxxxxxxx">
+          <div style="font-size:12px; color:var(--gray-500); margin-top:4px;">
+            需要 repo 权限，<a href="https://github.com/settings/tokens" target="_blank" style="color:var(--primary);">点击创建Token</a>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-size:13px; color:var(--gray-700); margin-bottom:6px;">仓库名称</label>
+          <input type="text" id="configRepo" class="search-input" style="width:100%;" placeholder="case-review" value="case-review">
+        </div>
+        <div style="background:var(--warning-light); padding:10px; border-radius:6px; font-size:12px; color:var(--warning);">
+          ⚠️ Token会保存在浏览器本地，请勿在公共电脑上使用此功能
+        </div>
+        <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
+          <button class="btn btn-secondary" onclick="closeTokenModal()">取消</button>
+          <button class="btn btn-primary" onclick="saveTokenConfig()">保存配置</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Table -->
@@ -414,6 +456,20 @@
   let openFilterDropdown = null;
   let importTime = new Date().toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(/\//g, '-');
 
+  // 实时同步配置
+  let githubConfig = {
+    username: '',
+    token: '',
+    repo: 'case-review',
+    enabled: false
+  };
+  
+  // 加载配置
+  const savedConfig = localStorage.getItem('githubSyncConfig');
+  if (savedConfig) {
+    githubConfig = { ...githubConfig, ...JSON.parse(savedConfig) };
+  }
+
   function init() {
     const saved = localStorage.getItem('caseReviewData');
     if (saved) reviewData = JSON.parse(saved);
@@ -421,6 +477,9 @@
     casesData.forEach(c => {
       if (!reviewData[c.case_id]) reviewData[c.case_id] = { decision: '', note: '', status: 'pending' };
     });
+    
+    // 设置自动同步开关状态
+    document.getElementById('autoSyncEnabled').checked = githubConfig.enabled;
     
     updateStats();
     renderTable();
@@ -693,6 +752,11 @@
     updateStats();
     renderTable(document.getElementById('searchBox').value);
     closeModal();
+    
+    // 实时同步到GitHub
+    if (githubConfig.enabled && githubConfig.token) {
+      syncToGitHub(currentCaseId, decision, note);
+    }
   }
 
   function saveProgress() {
@@ -872,6 +936,122 @@
     }
     
     return suggestions.join('；');
+  }
+
+  // ========== 实时同步功能 ==========
+  
+  // 切换自动同步开关
+  function toggleAutoSync() {
+    const checkbox = document.getElementById('autoSyncEnabled');
+    githubConfig.enabled = checkbox.checked;
+    localStorage.setItem('githubSyncConfig', JSON.stringify(githubConfig));
+    
+    if (githubConfig.enabled && !githubConfig.token) {
+      alert('请先配置GitHub Token');
+      checkbox.checked = false;
+      githubConfig.enabled = false;
+      showTokenConfig();
+    }
+  }
+  
+  // 显示Token配置弹窗
+  function showTokenConfig() {
+    document.getElementById('configUsername').value = githubConfig.username;
+    document.getElementById('configToken').value = githubConfig.token;
+    document.getElementById('configRepo').value = githubConfig.repo;
+    document.getElementById('tokenModal').classList.add('show');
+  }
+  
+  // 关闭Token配置弹窗
+  function closeTokenModal() {
+    document.getElementById('tokenModal').classList.remove('show');
+  }
+  
+  // 保存Token配置
+  function saveTokenConfig() {
+    const username = document.getElementById('configUsername').value.trim();
+    const token = document.getElementById('configToken').value.trim();
+    const repo = document.getElementById('configRepo').value.trim();
+    
+    if (!username || !token || !repo) {
+      alert('请填写完整配置');
+      return;
+    }
+    
+    githubConfig = { username, token, repo, enabled: true };
+    localStorage.setItem('githubSyncConfig', JSON.stringify(githubConfig));
+    
+    document.getElementById('autoSyncEnabled').checked = true;
+    closeTokenModal();
+    alert('✅ 配置保存成功！\n\n现在每次复审提交都会自动同步到GitHub');
+  }
+  
+  // 同步单条复审数据到GitHub
+  async function syncToGitHub(caseId, decision, note) {
+    try {
+      const caseData = casesData.find(c => c.case_id === caseId);
+      if (!caseData) return;
+      
+      // 构造反馈数据
+      const feedback = {
+        timestamp: new Date().toISOString(),
+        case_id: caseId,
+        case_type: caseData.category,
+        human_judgment: caseData.expected || '无违规',
+        ai_judgment: caseData.actual || '无违规',
+        ai_reason: caseData.reason || '',
+        correct_judgment: decision,
+        review_note: note,
+        ai_error_type: getAIErrorType(caseData.expected, caseData.actual, caseData.category)
+      };
+      
+      // 获取当前文件内容
+      const apiUrl = `https://api.github.com/repos/${githubConfig.username}/${githubConfig.repo}/contents/review_feedback.json`;
+      const headers = {
+        'Authorization': `token ${githubConfig.token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      };
+      
+      let existingData = [];
+      let sha = null;
+      
+      try {
+        const response = await fetch(apiUrl, { headers });
+        if (response.ok) {
+          const data = await response.json();
+          sha = data.sha;
+          existingData = JSON.parse(atob(data.content));
+        }
+      } catch (e) {
+        // 文件不存在，创建新文件
+      }
+      
+      // 添加新数据
+      existingData.push(feedback);
+      
+      // 更新文件
+      const updateData = {
+        message: `复审反馈: ${caseId} - ${decision}`,
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(existingData, null, 2))))
+      };
+      
+      if (sha) updateData.sha = sha;
+      
+      const updateResponse = await fetch(apiUrl, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify(updateData)
+      });
+      
+      if (updateResponse.ok) {
+        console.log('✅ 复审数据已同步到GitHub');
+      } else {
+        const error = await updateResponse.json();
+        console.error('同步失败:', error);
+      }
+    } catch (error) {
+      console.error('同步错误:', error);
+    }
   }
 
   function setupEvents() {
