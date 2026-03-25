@@ -64,6 +64,8 @@
   .btn-primary:hover { background:#1d4ed8; }
   .btn-secondary { background:#fff; color:var(--gray-700); border:1px solid var(--gray-200); }
   .btn-secondary:hover { background:var(--gray-50); }
+  .btn-success { background:var(--success); color:#fff; }
+  .btn-success:hover { background:#059669; }
 
   /* Table */
   .table-wrap { background:#fff; border-radius:8px; border:1px solid var(--gray-200); overflow:hidden; }
@@ -237,6 +239,11 @@
       <label><input type="checkbox" id="exportDisagree" checked> 判罚不一致</label>
       <label><input type="checkbox" id="exportPending"> 仅待复审</label>
       <button class="btn btn-primary" onclick="exportCases()" style="margin-left:auto;">导出JSON</button>
+    </div>
+    <div class="export-row" style="margin-top:12px; padding-top:12px; border-top:1px solid var(--gray-200);">
+      <span style="color:var(--gray-600); font-size:13px;">AI优化反馈：</span>
+      <button class="btn btn-success" onclick="exportReviewForAI()">📋 导出复审数据给AI优化</button>
+      <button class="btn btn-secondary" onclick="copyReviewSummary()">📄 复制复审摘要</button>
     </div>
   </div>
 
@@ -722,6 +729,149 @@
     a.href = URL.createObjectURL(blob);
     a.download = `复审结果_${new Date().toISOString().slice(0,10)}.json`;
     a.click();
+  }
+
+  // 导出复审数据给AI优化 - 生成格式化的反馈数据
+  function exportReviewForAI() {
+    const reviewedCases = casesData.filter(c => 
+      reviewData[c.case_id] && 
+      reviewData[c.case_id].status === 'done' && 
+      reviewData[c.case_id].decision
+    );
+
+    if (reviewedCases.length === 0) {
+      alert('暂无已复审的案例，请先完成复审后再导出');
+      return;
+    }
+
+    const feedbackData = {
+      export_time: new Date().toLocaleString('zh-CN'),
+      total_reviewed: reviewedCases.length,
+      summary: {
+        llm_missing: reviewedCases.filter(c => c.category === 'llm-missing').length,
+        disagree: reviewedCases.filter(c => c.category === 'disagree').length,
+        ai_too_heavy: reviewedCases.filter(c => {
+          const expLevel = getSeverityLevel(c.expected);
+          const actLevel = getSeverityLevel(c.actual);
+          return actLevel > expLevel;
+        }).length,
+        ai_too_light: reviewedCases.filter(c => {
+          const expLevel = getSeverityLevel(c.expected);
+          const actLevel = getSeverityLevel(c.actual);
+          return actLevel < expLevel;
+        }).length
+      },
+      cases: reviewedCases.map(c => {
+        const rd = reviewData[c.case_id];
+        return {
+          case_id: c.case_id,
+          case_type: c.category,
+          original_data: {
+            human_judgment: c.expected,
+            ai_judgment: c.actual,
+            ai_reason: c.reason,
+            messages: c.messages || []
+          },
+          review_result: {
+            correct_judgment: rd.decision,
+            review_note: rd.note,
+            ai_error_type: getAIErrorType(c.expected, c.actual, c.category),
+            improvement_suggestion: getImprovementSuggestion(c, rd)
+          }
+        };
+      })
+    };
+
+    const blob = new Blob([JSON.stringify(feedbackData, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `AI优化反馈_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    
+    alert(`✅ 已导出 ${reviewedCases.length} 条复审数据\n\n请将下载的JSON文件发给AI助手，用于优化判罚逻辑`);
+  }
+
+  // 复制复审摘要 - 方便直接粘贴给AI
+  function copyReviewSummary() {
+    const reviewedCases = casesData.filter(c => 
+      reviewData[c.case_id] && 
+      reviewData[c.case_id].status === 'done' && 
+      reviewData[c.case_id].decision
+    );
+
+    if (reviewedCases.length === 0) {
+      alert('暂无已复审的案例');
+      return;
+    }
+
+    let summary = `【言语违规判罚复审摘要】\n`;
+    summary += `导出时间: ${new Date().toLocaleString('zh-CN')}\n`;
+    summary += `复审案例数: ${reviewedCases.length}\n\n`;
+    
+    summary += `【错误类型统计】\n`;
+    const errorTypes = {};
+    reviewedCases.forEach(c => {
+      const errorType = getAIErrorType(c.expected, c.actual, c.category);
+      errorTypes[errorType] = (errorTypes[errorType] || 0) + 1;
+    });
+    Object.entries(errorTypes).forEach(([type, count]) => {
+      summary += `- ${type}: ${count}例\n`;
+    });
+    
+    summary += `\n【典型案例】\n`;
+    const examples = reviewedCases.slice(0, 5);
+    examples.forEach((c, i) => {
+      const rd = reviewData[c.case_id];
+      summary += `\n${i+1}. ${c.case_id}\n`;
+      summary += `   人工判罚: ${c.expected || '无违规'}\n`;
+      summary += `   AI判罚: ${c.actual || '无违规'}\n`;
+      summary += `   复审结论: ${rd.decision}\n`;
+      if (rd.note) summary += `   复审意见: ${rd.note}\n`;
+    });
+
+    if (reviewedCases.length > 5) {
+      summary += `\n... 还有 ${reviewedCases.length - 5} 个案例\n`;
+    }
+
+    navigator.clipboard.writeText(summary).then(() => {
+      alert(`✅ 已复制复审摘要到剪贴板\n\n可以直接粘贴发给AI助手`);
+    }).catch(() => {
+      // 降级方案：显示在弹窗中
+      prompt('复制以下内容：', summary);
+    });
+  }
+
+  // 获取AI错误类型
+  function getAIErrorType(expected, actual, category) {
+    if (category === 'llm-missing') return 'LLM漏判';
+    if (category === 'agree') return '判罚一致';
+    
+    const expLevel = getSeverityLevel(expected);
+    const actLevel = getSeverityLevel(actual);
+    
+    if (actLevel > expLevel) return 'AI判罚偏重';
+    if (actLevel < expLevel) return 'AI判罚偏轻';
+    return '判罚存在差异';
+  }
+
+  // 生成改进建议
+  function getImprovementSuggestion(caseData, reviewData) {
+    const suggestions = [];
+    const errorType = getAIErrorType(caseData.expected, caseData.actual, caseData.category);
+    
+    if (errorType === 'LLM漏判') {
+      suggestions.push('需要增强违规识别能力，避免漏判');
+    } else if (errorType === 'AI判罚偏重') {
+      suggestions.push('需要降低判罚敏感度，避免过度判罚');
+    } else if (errorType === 'AI判罚偏轻') {
+      suggestions.push('需要提高判罚敏感度，避免漏判或降级处理');
+    }
+    
+    if (reviewData.note) {
+      suggestions.push(`复审意见: ${reviewData.note}`);
+    }
+    
+    return suggestions.join('；');
   }
 
   function setupEvents() {
